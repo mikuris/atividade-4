@@ -1,4 +1,6 @@
-# 1. O que é uma função de hash e por que não dá para voltar à senha
+
+
+## 1. O que é uma função de hash e por que não dá para voltar à senha
 
 Uma função de hash pega um texto (a senha) e devolve uma sequência de tamanho fixo
 que funciona como uma "impressão digital" dele. A mesma entrada sempre gera o mesmo
@@ -28,9 +30,23 @@ o atacante precisaria refazer o trabalho de adivinhação para cada usuário.
 SELECT login, salt, senha_hash FROM usuarios WHERE login IN ('maria', 'joao');
 ```
 
-Resultado esperado: os dois `salt` são diferentes e, por isso, os dois `senha_hash`
-também são diferentes, apesar de a senha ser a mesma. (Colem aqui o print/resultado
-real do banco de vocês.)
+Resultado: os dois `salt` são diferentes e, por isso, os dois `senha_hash`
+também são diferentes, apesar de a senha ser a mesma.
+
+Saída do `prova_salt.py`, que cadastra dois usuários com a mesma senha pelo `inserir` e lê o que ficou gravado:
+
+```
+Mesma senha nos dois usuários: abc123
+
+login:      joao_prova
+salt:       2a442dc2f07fca93df0398e28473de90
+senha_hash: 0773f2d361829fdce19599adb1b6f2e7f03962e82022843f68e7fe5b5996fa3c
+
+login:      maria_prova
+salt:       c7dcea2ef3ba6071abf5bf82c528194c
+senha_hash: ad3677fdb6b0392576463d1943192a70b89bd068951b6df0ec35e5c66cbc9573
+```
+
 
 ## 3. Por que o salt pode ficar no banco sem ser segredo
 
